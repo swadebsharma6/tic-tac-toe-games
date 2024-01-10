@@ -7,6 +7,7 @@ const App = () => {
     <h1 className="text-3xl mb-10 text-center font-bold ">
     Hello Tic-Tac-Toe world! </h1>
   <Square></Square>
+  
     </div>
   );
 };

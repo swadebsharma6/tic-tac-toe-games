@@ -14,15 +14,39 @@ function SingleBox({value, onSquareClick}) {
 const Square = () => {
 
   const [singleValue, setSingleValue]= useState(Array(9).fill(null));
+  const [isNext, setIsNext] = useState(true);
+
+  const winner = calculateWinner(singleValue);
+  let status;
+
+  if(winner){
+    status = `Winner: ${winner}`
+  } 
+  else{
+    status = "Next Player" + (isNext ? "X" : "O")
+  }
 
   const handleClick =(i)=>{
+
+    if(singleValue[i] || calculateWinner(singleValue)){
+      return;
+    }
+
      const newSquares = singleValue.slice();
-     newSquares[i] = "X";
+     if(isNext){
+      newSquares[i] = "X"
+     }
+     else{
+      newSquares[i] = "O";
+     }
+    
      setSingleValue(newSquares);
+     setIsNext(!isNext);
   }
 
   return (
     <>
+      <div>{status}</div>
       <div className="flex">
         <SingleBox onSquareClick={()=>handleClick(0)} value={singleValue[0]}></SingleBox>
         <SingleBox onSquareClick={()=>handleClick(1)} value={singleValue[1]}></SingleBox>
@@ -43,4 +67,31 @@ const Square = () => {
   );
 };
 
+
 export default Square;
+
+function calculateWinner(squares) {
+  const lines = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+  ];
+  for (let i = 0; i < lines.length; i++) {
+    const [a, b, c] = lines[i];
+    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+      return squares[a];
+    }
+  }
+  return null;
+}
+
+
+ 
+
+
+
