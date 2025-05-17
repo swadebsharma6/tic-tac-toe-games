@@ -1,11 +1,6 @@
 import { useState } from "react";
 
 const Square = ({value, onSquareClick}) => {
-  // const [value, setValue] = useState(null)
-  
-  // const handleClick =()=>{
-  //   // setValue('X')
-  // }
 
   return (
     <button onClick={onSquareClick} className="w-16 h-16 m-2 bg-cyan-500 rounded-md border border-gray-200">
@@ -18,7 +13,8 @@ const Square = ({value, onSquareClick}) => {
 
 
 const Board = () => {
-  const [squares, setSquares] = useState([Array(9).fill(null)]);
+  // const [squares, setSquares] = useState([Array(9).fill(null)]);
+  const [squares, setSquares] = useState(Array(9).fill(null));
   const [xIsNext, setXIsNext] = useState(true);
   console.log(squares)
 
